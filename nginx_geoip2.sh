@@ -174,3 +174,5 @@ if ($language = 0){
 }
 EOF
 nginx -t
+cd /www/server/nginx/conf/vhost/
+ls
