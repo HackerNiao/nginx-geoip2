@@ -78,6 +78,17 @@ http {
     include       vhost/*.conf;
     set_real_ip_from 0.0.0.0/0;
     real_ip_header X-Forwarded-For;
+
+        gzip on;
+        gzip_min_length  1k;
+        gzip_buffers     4 16k;
+        gzip_http_version 1.1;
+        gzip_comp_level 2;
+        gzip_types     text/plain application/javascript application/x-javascript text/javascript text/css application/xml;
+        gzip_vary on;
+        gzip_proxied   expired no-cache no-store private auth;
+        gzip_disable   "MSIE [1-6]\.";
+
     geoip2  /usr/share/GeoIP/GeoLite2-Country.mmdb {
           $geoip2_Country_code country iso_code;
     }
@@ -99,6 +110,12 @@ http {
             root   html;
         }
     }
+    server {
+      listen 80 default_server;
+      server_name _;
+      return 403;
+    }
+
 }
 EOF
 
