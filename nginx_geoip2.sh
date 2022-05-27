@@ -161,7 +161,7 @@ if ($geoip2_country_code = VN) {
   add_header  accept-language vi-VN;
 }
 if ($geoip2_country_code = TH) {
-  set $language "5";
+  set $language "6";
   add_header  accept-language th;
 }
 if ($language = 0){
