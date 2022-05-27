@@ -62,6 +62,8 @@ cp nginx.conf nginx.conf.back
 
 cat > /www/server/nginx/conf/nginx.conf <<"EOF"
 user  www www;
+error_log /www/server/nginx/logs/nginx_error.log;
+pid /www/server/nginx/conf/nginx.pid;
 worker_rlimit_nofile 51200;
 worker_processes  auto;
 events
@@ -157,6 +159,10 @@ if ($geoip2_country_code = TW) {
 if ($geoip2_country_code = VN) {
   set $language "5";
   add_header  accept-language vi-VN;
+}
+if ($geoip2_country_code = TH) {
+  set $language "5";
+  add_header  accept-language th;
 }
 if ($language = 0){
     add_header  accept-language en;
